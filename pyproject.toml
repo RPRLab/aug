@@ -1,0 +1,10 @@
+[project]
+name = "aug"
+version = "0.1.0"
+description = "Documentation site for the RPR Lab AWS User's Group"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "flexoki-zensical>=0.1.1",
+    "zensical>=0.0.50",
+]
