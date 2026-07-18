@@ -10,7 +10,7 @@ tags:
 
 Human access to the lab's AWS organization is managed through IAM Identity Center. Do not create long-lived IAM users for normal access.
 
-All IAM Identity Center administration is performed from the `rprlab` management account using an authorized `Lab-Admins` identity.
+All IAM Identity Center administration is performed from the `rprlab` management account using an authorized `Administrators` identity.
 
 ## Adding a user
 
@@ -24,7 +24,7 @@ All IAM Identity Center administration is performed from the `rprlab` management
 
 5. Keep the option to email password setup instructions selected. IAM Identity Center invitations expire, so resend the invitation if it is not accepted in time.
 
-6. Add the user to `Researchers` only. Add them to `Lab-Admins` as well only when administrator access has been explicitly approved.
+6. Add the user to `Researchers` only. Add them to `Administrators` as well only when administrator access has been explicitly approved.
 
 7. Review the details and choose **Add user**.
 
@@ -44,9 +44,9 @@ Change access through group membership:
 
 - To grant researcher access, add the user to `Researchers`.
 
-- To grant administrator access, retain `Researchers` and additionally add `Lab-Admins`.
+- To grant administrator access, retain `Researchers` and additionally add `Administrators`.
 
-- To remove administrator access while retaining research access, remove only `Lab-Admins`.
+- To remove administrator access while retaining research access, remove only `Administrators`.
 
 - To suspend all access without immediately deleting the identity, disable user access or remove all account assignments while the situation is reviewed.
 
@@ -73,7 +73,7 @@ Treat access according to the authority it confers:
 | Management account root | Unrestricted control of the organization and billing                           | Rotate the password for the recovery mailbox (or the recovery mailbox itself) first, then the root password and MFA |
 | Research account root   | Unrestricted control of research resources                                     | Rotate the password for the recovery mailbox (or the recovery mailbox itself) first, then the root password and MFA |
 | Root recovery mailbox   | Can initiate account recovery                                                  | Rotate the password for the mailbox and make sure the user is not listed in the recovery methods                    |
-| `Lab-Admins`            | Can manage Identity Center, accounts, permissions, and research infrastructure | Remove from `Lab-Admins` group; delete the user if fully off-boarded                                                |
+| `Administrators`        | Can manage Identity Center, accounts, permissions, and research infrastructure | Remove from `Administrators` group; delete the user if fully off-boarded                                            |
 | `Researchers`           | Can create and manage most resources in the research account                   | Remove from `Researchers` group; delete the user if fully off-boarded                                               |
 
 !!!Failure "Root credentials are break-glass credentials"

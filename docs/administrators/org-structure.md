@@ -27,18 +27,20 @@ Each account uses a lab-controlled root recovery mailbox. The exact addresses an
 
 Human access is centrally managed from [IAM Identity Center](https://986542260596-qogog24k.eu-north-1.console.aws.amazon.com/singlesignon/home?region=eu-north-1#/instances/6508293e3330524d/dashboard) in the management account. Assign account access to groups rather than directly to individual users.
 
-| Group         | Assignment                                       | Scope                                          |
-| ------------- | ------------------------------------------------ | ---------------------------------------------- |
-| `Lab-Admins`  | `AdministratorAccess` in `rprlab` and `research` | Organization and infrastructure administration |
-| `Researchers` | `PowerUserAccess` in `research`                  | Normal research workloads                      |
+| Group            | Assignment                                       | Scope                                          |
+| ---------------- | ------------------------------------------------ | ---------------------------------------------- |
+| `Administrators` | `AdministratorAccess` in `rprlab` and `research` | Organization and infrastructure administration |
+| `Researchers`    | `ResearcherAccess` in `research`                 | Normal research workloads                      |
 
-Only trusted infrastructure administrators should join `Lab-Admins`. Administrators normally also remain in `Researchers` so both intended account assignments are explicit.
+`ResearcherAccess` is the lab-specific researcher permission set. It is built from the AWS-managed `PowerUserAccess` policy plus an inline policy that grants the additional, narrowly scoped IAM permissions documented below. Maintain both components on the `ResearcherAccess` permission set in IAM Identity Center.
+
+Only trusted infrastructure administrators should join `Administrators`. Administrators normally also remain in `Researchers` so both intended account assignments are explicit.
 
 See [Identity and access management](../administrators/identity-access.md) for adding users, MFA, privilege changes, and off-boarding.
 
-## Researcher instance-profile permissions
+## ResearcherAccess inline permissions
 
-The `PowerUserAccess` permission set does not ordinarily allow researchers to pass IAM roles to EC2. The following inline policy was added to grant the minimum additional access required to view and assign the approved `rprlab-ec2-research-instance-role` profile.
+The AWS-managed `PowerUserAccess` policy does not allow researchers to pass IAM roles to EC2. `ResearcherAccess` therefore adds the following inline policy to the managed policy. It grants the minimum additional access required to view instance profiles and assign the approved `rprlab-ec2-research-instance-role` profile.
 
 Edit this, and other policies from the `rprlab` management account under [IAM Identity Center > Multi-account permissions > Permission sets](https://986542260596-qogog24k.eu-north-1.console.aws.amazon.com/singlesignon/home?region=eu-north-1#/instances/6508293e3330524d/permission-sets).
 

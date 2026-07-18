@@ -23,7 +23,7 @@ The following shared resources are maintained in the `research` account:
 | AWS managed policy            | `AmazonSSMManagedInstanceCore`      | Supplies the core Systems Manager managed-node permissions                    |
 | EC2 security group            | `rprlab-session-manager-only`       | Allows no inbound traffic and currently retains the default outbound access   |
 
-The role is for EC2 workloads, not human identities. Researchers receive permission to pass only this approved role to EC2 through the inline policy documented under [Organization structure](../administrators/org-structure.md#researcher-instance-profile-permissions).
+The role is for EC2 workloads, not human identities. Researchers receive permission to pass only this approved role to EC2 through the inline policy documented under [Organization structure](../administrators/org-structure.md#researcheraccess-inline-permissions).
 
 ## Required launch configuration
 
