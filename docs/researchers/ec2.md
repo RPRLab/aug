@@ -65,6 +65,10 @@ With any instances you create, it is expected that you assign an `Owner` tag wit
 
 You can launch templates from the [AWS Management Console](https://376129434881-cvwoy6d4.eu-north-1.console.aws.amazon.com/ec2/home?region=eu-north-1#LaunchInstanceFromTemplate:) or the AWS CLI, for example:
 
+!!!Note "Leave the SSH key pair not specified"
+
+    When launching an approved template through the AWS Management Console, you may be asked to select an SSH key pair. Leave **Key pair (login)** as **Not specified**, even if AWS warns that this is not recommended. The lab uses Session Manager for access, so an SSH key pair is not required.
+
 ```sh title="shell"
 aws ec2 run-instances \
     --launch-template LaunchTemplateName=rprlab-hoodini-standard \
