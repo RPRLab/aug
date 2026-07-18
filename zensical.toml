@@ -7,9 +7,7 @@ repo_url = "https://github.com/rprlab/aug"
 edit_uri = "https://github.com/rprlab/aug/edit/main/docs/"
 copyright = "Copyright &copy; 2026 RPR Lab AWS User's Group"
 nav = [
-  { Home = [
-    { Overview = "index.md" },
-  ] },
+  { Home = "index.md" },
   { "Researchers" = [
     { Introduction = "researchers/introduction.md" },
     { "Accessing AWS" = "researchers/accessing-aws.md" },

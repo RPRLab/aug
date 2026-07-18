@@ -2,12 +2,10 @@
 
 The RPR Lab AWS environment provides shared compute and storage for research. Use these docs to access AWS, learn how to launch reproducible analysis environments, manage working storage, and preserve project data.
 
-<br>
-
-[Launch the AWS access portal](https://ssoins-6508293e3330524d.portal.eu-north-1.app.aws){ .md-button .md-button--primary } &nbsp;&nbsp; [Learn about using AWS](./researchers/introduction.md){ .md-button .md-button--primary }
-{: style="text-align: center;" }
-
-<br>
+<div class="home-actions">
+  <a class="md-button md-button--primary" href="https://ssoins-6508293e3330524d.portal.eu-north-1.app.aws">Launch the AWS access portal</a>
+  <a class="md-button md-button--primary" href="./researchers/introduction/">Learn about using AWS</a>
+</div>
 
 ## Getting help
 
