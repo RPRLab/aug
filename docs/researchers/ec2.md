@@ -67,7 +67,7 @@ You can launch templates from the [AWS Management Console](https://376129434881-
 
 !!!Note "Leave the SSH key pair not specified"
 
-    When launching an approved template through the AWS Management Console, you may be asked to select an SSH key pair. Leave **Key pair (login)** as **Not specified**, even if AWS warns that this is not recommended. The lab uses Session Manager for access, so an SSH key pair is not required.
+    When launching an approved template through the AWS Management Console, you will be asked to **Create a key pair or proceed without a key pair**. Select **Proceed without key pair**. The lab uses Session Manager for access, so an SSH key pair is not required.
 
 ```sh title="shell"
 aws ec2 run-instances \
