@@ -4,7 +4,7 @@ Documentation for the RPR Lab AWS User's Group, built with [Zensical](https://ze
 
 ## Local development
 
-Install [uv](https://docs.astral.sh/uv/getting-started/installation/), then synchronize the locked environment:
+Install Python 3.13 or newer and [uv](https://docs.astral.sh/uv/getting-started/installation/), then synchronize the locked environment:
 
 ```sh
 uv sync --locked
