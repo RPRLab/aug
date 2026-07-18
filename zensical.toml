@@ -27,9 +27,12 @@ nav = [
     { "Hoodini AMI Example" = "administrators/hoodini-ami.md" },
   ] },
 ]
+extra_css = ["stylesheets/page-actions.css"]
+extra_javascript = ["javascripts/page-actions.js"]
 
 [project.theme]
 name = "flexoki"
+custom_dir = "overrides"
 favicon = "images/favicon.svg"
 features = [
   "content.action.edit",

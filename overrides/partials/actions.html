@@ -1,0 +1,107 @@
+{% if page.edit_url %}
+  {% if "/blob/" in page.edit_url %}
+    {% set source_part = "/blob/" %}
+  {% else %}
+    {% set source_part = "/edit/" %}
+  {% endif %}
+  {% set source_url = page.edit_url | replace(source_part, "/raw/") %}
+
+  {% if "content.action.edit" in features or "content.action.view" in features %}
+    <div
+      class="page-actions"
+      data-page-actions
+      data-source-url="{{ source_url }}"
+      data-site-index-url="{{ config.site_url }}llms.txt"
+    >
+      {% if "content.action.view" in features %}
+        <div class="page-actions__copy">
+          <button class="page-actions__primary" type="button" data-copy-page>
+            <span class="page-actions__icon" aria-hidden="true">
+              {% include ".icons/lucide/copy.svg" %}
+            </span>
+            <span data-copy-page-label>Copy page</span>
+          </button>
+          <button
+            class="page-actions__toggle"
+            type="button"
+            aria-label="More page actions"
+            aria-haspopup="menu"
+            aria-expanded="false"
+            data-page-actions-toggle
+          >
+            <span class="page-actions__icon" aria-hidden="true">
+              {% include ".icons/lucide/chevron-down.svg" %}
+            </span>
+          </button>
+
+          <div class="page-actions__menu" role="menu" data-page-actions-menu hidden>
+            <button class="page-actions__item" type="button" role="menuitem" data-copy-page-link>
+              <span class="page-actions__item-icon" aria-hidden="true">
+                {% include ".icons/lucide/link.svg" %}
+              </span>
+              <span>
+                <strong data-copy-link-label>Copy page link</strong>
+                <small>Copy the current page URL to clipboard</small>
+              </span>
+            </button>
+
+            <a class="page-actions__item" href="{{ source_url }}" target="_blank" rel="noopener noreferrer" role="menuitem">
+              <span class="page-actions__item-icon" aria-hidden="true">
+                {% include ".icons/lucide/external-link.svg" %}
+              </span>
+              <span>
+                <strong>View Page as Markdown</strong>
+                <small>Open the Markdown file in a new tab</small>
+              </span>
+            </a>
+
+            <a class="page-actions__item" href="#" target="_blank" rel="noopener noreferrer" role="menuitem" data-ai-link="claude">
+              <span class="page-actions__item-icon page-actions__item-icon--brand" aria-hidden="true">
+                {% include ".icons/simple/claude.svg" %}
+              </span>
+              <span>
+                <strong>Open in Claude</strong>
+                <small>Ask Claude about this page</small>
+              </span>
+            </a>
+
+            <a class="page-actions__item" href="#" target="_blank" rel="noopener noreferrer" role="menuitem" data-ai-link="chatgpt">
+              <span class="page-actions__item-icon page-actions__item-icon--brand" aria-hidden="true">
+                {% include ".icons/fontawesome/brands/openai.svg" %}
+              </span>
+              <span>
+                <strong>Open in ChatGPT</strong>
+                <small>Ask ChatGPT about this page</small>
+              </span>
+            </a>
+
+            <a class="page-actions__item page-actions__item--site" href="{{ config.site_url }}llms.txt" target="_blank" rel="noopener noreferrer" role="menuitem">
+              <span class="page-actions__item-icon" aria-hidden="true">
+                {% include ".icons/lucide/library.svg" %}
+              </span>
+              <span>
+                <strong>All documentation</strong>
+                <small>Machine-readable Markdown index for AI tools</small>
+              </span>
+            </a>
+          </div>
+        </div>
+      {% endif %}
+
+      {% if "content.action.edit" in features %}
+        <a
+          href="{{ page.edit_url }}"
+          title="{{ lang.t('action.edit') }}"
+          aria-label="{{ lang.t('action.edit') }}"
+          class="page-actions__edit md-content__button md-icon"
+          rel="edit"
+        >
+          {% set icon = config.theme.icon.edit or "material/file-edit-outline" %}
+          {% include ".icons/" ~ icon ~ ".svg" %}
+        </a>
+      {% endif %}
+
+      <span class="page-actions__status" role="status" aria-live="polite" data-page-actions-status></span>
+    </div>
+  {% endif %}
+{% endif %}
