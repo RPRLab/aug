@@ -1,0 +1,25 @@
+# RPR Lab AWS User's Group Documentation
+
+> Documentation for researchers and administrators using the RPR Lab AWS environment. Use these Markdown sources together so answers reflect the lab's access model, security requirements, resource standards, and operational guidance.
+
+## Overview
+
+- [AWS User's Group overview](https://raw.githubusercontent.com/rprlab/aug/main/docs/index.md): Entry point, roles, support, and access portal.
+
+## Researchers
+
+- [Introduction for researchers](https://raw.githubusercontent.com/rprlab/aug/main/docs/researchers/introduction.md): Core responsibilities and a guide to choosing AWS services.
+- [Accessing AWS](https://raw.githubusercontent.com/rprlab/aug/main/docs/researchers/accessing-aws.md): Browser, CLI, and identity-center access procedures.
+- [Elastic Compute Cloud (EC2)](https://raw.githubusercontent.com/rprlab/aug/main/docs/researchers/ec2.md): Temporary compute, costs, lifecycle, and operating guidance.
+- [Elastic Block Store (EBS)](https://raw.githubusercontent.com/rprlab/aug/main/docs/researchers/ebs.md): Block storage behavior, costs, attachment, and lifecycle.
+- [Simple Storage Service (S3)](https://raw.githubusercontent.com/rprlab/aug/main/docs/researchers/s3.md): Durable object storage, data movement, and usage guidance.
+
+## Administrators
+
+- [Introduction for administrators](https://raw.githubusercontent.com/rprlab/aug/main/docs/administrators/introduction.md): Administrative scope and responsibilities.
+- [Organization structure, groups, and permissions](https://raw.githubusercontent.com/rprlab/aug/main/docs/administrators/org-structure.md): AWS Organizations structure and permission model.
+- [Identity and access management](https://raw.githubusercontent.com/rprlab/aug/main/docs/administrators/identity-access.md): Identity Center, IAM roles, and access controls.
+- [Resource standards](https://raw.githubusercontent.com/rprlab/aug/main/docs/administrators/resource-standards.md): Naming, tagging, lifecycle, and data-placement standards.
+- [EC2 access and network security](https://raw.githubusercontent.com/rprlab/aug/main/docs/administrators/ec2-security.md): Session Manager, security groups, and network access requirements.
+- [Amazon Machine Images and launch templates](https://raw.githubusercontent.com/rprlab/aug/main/docs/administrators/amis.md): AMI preparation, maintenance, and launch-template guidance.
+- [Hoodini AMI example](https://raw.githubusercontent.com/rprlab/aug/main/docs/administrators/hoodini-ami.md): Recorded construction of the Hoodini analysis environment.
