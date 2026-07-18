@@ -26,7 +26,9 @@ Generated files are written to `site/` and are not committed.
 
 ## Preferred pull-request workflow
 
-Do not work directly on `main`. Create a short, descriptive branch directly in `RPRLab/aug`, for example `improve-ec2-guide`. Branches in the main repository receive automatic Cloudflare preview deployments; branches in forks do not.
+The `main` branch is protected: changes must be merged through a pull request, force pushes and branch deletion are blocked, review conversations must be resolved, and the required `Workers Builds: aug-preview` Cloudflare check must pass.
+
+Create a short, descriptive branch directly in `RPRLab/aug`, for example `improve-ec2-guide`. Branches in the main repository receive automatic Cloudflare preview deployments; branches in forks do not.
 
 Start from the latest `main`:
 
@@ -51,7 +53,7 @@ Open the pull request:
 gh pr create --base main --fill
 ```
 
-Wait for the checks to finish and use the Cloudflare preview URL posted on the pull request to review the rendered site. Once the pull request is approved, merge it and delete the feature branch:
+Wait for `Workers Builds: aug-preview` to pass and use the Cloudflare preview URL posted on the pull request to review the rendered site. Resolve any open review conversations, then merge the pull request and delete the feature branch:
 
 ```sh
 gh pr checks --watch
