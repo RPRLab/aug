@@ -1,6 +1,6 @@
 .page-actions {
   position: relative;
-  z-index: 4;
+  z-index: 3;
   float: right;
   display: flex;
   align-items: center;
@@ -135,12 +135,6 @@
 .md-typeset .page-actions a.page-actions__item small {
   text-decoration: none !important;
   text-decoration-line: none !important;
-}
-
-.page-actions__item--site {
-  margin-top: 0.12rem;
-  border-top: 0.05rem solid var(--md-default-fg-color--lightest);
-  border-radius: 0 0 0.12rem 0.12rem;
 }
 
 .page-actions__item-icon {
