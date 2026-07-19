@@ -81,7 +81,7 @@ Also apply the following tags to shared AMIs and their snapshots:
 
 - `Version` as the date in [ISO format](https://www.iso.org/iso-8601-date-and-time-format.html).
 
-Depending on the size of the final volume, it may take minutes to hours to complete the snapshot. You can check the progress by navigating to the AMI details, clicking **Storage** and the snapshot Device ID (i.e., `snap-xxxxxxxxxxxxxxxxx`).
+Depending on the size of the final volume, it may take minutes to hours to complete the snapshot. Check progress under [EC2 > Images > AMIs](https://376129434881-cvwoy6d4.eu-north-1.console.aws.amazon.com/ec2/home?region=eu-north-1#Images:) by opening the AMI details, choosing **Storage**, and selecting the snapshot device ID (for example, `snap-xxxxxxxxxxxxxxxxx`).
 
 When the AMI is ready, launch a new test instance from it and verify:
 
@@ -133,7 +133,7 @@ Consider building additional `small` or `large` templates the up- or down-scale 
 
 ## Updating a launch template
 
-Launch templates can be re-versioned by selecting an existing launch template and choosing **Actions > Modify template (Create new version)**.
+Launch templates can be re-versioned under [EC2 > Instances > Launch Templates](https://376129434881-cvwoy6d4.eu-north-1.console.aws.amazon.com/ec2/home?region=eu-north-1#LaunchTemplates:) by selecting an existing template and choosing **Actions > Modify template (Create new version)**.
 
 When updating, remember to set the new version as the default.
 
@@ -153,4 +153,4 @@ Before deregistering:
 
     Deregistering prevents new instances from being launched from the AMI. Deleting its snapshots removes the stored image data. Existing instances launched from the AMI are not deleted, but they do not make the AMI recoverable.
 
-In the console, select the obsolete image, choose **Actions > Deregister AMI**, and select **Delete associated snapshots** only after completing the checks above.
+Under [EC2 > Images > AMIs](https://376129434881-cvwoy6d4.eu-north-1.console.aws.amazon.com/ec2/home?region=eu-north-1#Images:), select the obsolete image, choose **Actions > Deregister AMI**, and select **Delete associated snapshots** only after completing the checks above.

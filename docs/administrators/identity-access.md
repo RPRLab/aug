@@ -14,9 +14,9 @@ All IAM Identity Center administration is performed from the `rprlab` management
 
 ## Adding a user
 
-1. Sign in through the AWS access portal and open the `rprlab` management account with `AdministratorAccess`.
+1. Sign in through the [AWS access portal](https://ssoins-6508293e3330524d.portal.eu-north-1.app.aws) and open the `rprlab` management account with `AdministratorAccess`.
 
-2. Navigate to **IAM Identity Center > Users** and choose **Add user**.
+2. Open [IAM Identity Center > Users](https://986542260596-qogog24k.eu-north-1.console.aws.amazon.com/singlesignon/home?region=eu-north-1#/instances/6508293e3330524d/users) and choose **Add user**.
 
 3. Set the username to the person's concatenated first and last name in lowercase, for example `leightonpayne`. IAM Identity Center usernames are unique and cannot be changed later.
 
@@ -34,7 +34,7 @@ All IAM Identity Center administration is performed from the `rprlab` management
 
 The lab requires MFA for IAM Identity Center sign-in. New users should be required to register a device during their first sign-in, and the current policy requires MFA at every sign-in.
 
-Administrators should periodically confirm this under **IAM Identity Center > Settings > Authentication > Multi-factor authentication**.
+Administrators should periodically confirm this under [IAM Identity Center > Settings](https://986542260596-qogog24k.eu-north-1.console.aws.amazon.com/singlesignon/home?region=eu-north-1#/instances/6508293e3330524d/settings) **> Authentication > Multi-factor authentication**.
 
 If a user loses an MFA device, verify their identity through an independent channel before removing or replacing it. Do not disable MFA enforcement to work around an individual enrollment problem.
 
@@ -50,13 +50,13 @@ Change access through group membership:
 
 - To suspend all access without immediately deleting the identity, disable user access or remove all account assignments while the situation is reviewed.
 
-After any privilege change, verify the user's group memberships and account assignments from IAM Identity Center. Record who approved administrator access and when it was granted or removed.
+After any privilege change, verify the user's group memberships and account assignments under [IAM Identity Center > Users](https://986542260596-qogog24k.eu-north-1.console.aws.amazon.com/singlesignon/home?region=eu-north-1#/instances/6508293e3330524d/users). Record who approved administrator access and when it was granted or removed.
 
 ## Off-boarding
 
 Off-board access as soon as it is no longer required.
 
-1. Delete the IAM Identity Center user if they are being fully off-boarded.
+1. Delete the user under [IAM Identity Center > Users](https://986542260596-qogog24k.eu-north-1.console.aws.amazon.com/singlesignon/home?region=eu-north-1#/instances/6508293e3330524d/users) if they are being fully off-boarded.
 
 2. Review resources tagged with the user's `Owner` value, including running and stopped EC2 instances, EBS volumes, S3 objects under their user prefix.
 

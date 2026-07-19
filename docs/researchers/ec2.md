@@ -63,7 +63,7 @@ Choose the smallest template that can reasonably run your job. [Upload final out
 
 With any instances you create, it is expected that you assign an `Owner` tag with your username, and a `Project` tag with a short code that will help identify the purpose of the instance. This way, if instances are left running or stopped, we can more easily triage what can safely be terminated.
 
-You can launch templates from the [AWS Management Console](https://376129434881-cvwoy6d4.eu-north-1.console.aws.amazon.com/ec2/home?region=eu-north-1#LaunchInstanceFromTemplate:) or the AWS CLI, for example:
+You can launch templates from [EC2 > Instances > Launch Templates > Launch instance from template](https://376129434881-cvwoy6d4.eu-north-1.console.aws.amazon.com/ec2/home?region=eu-north-1#LaunchInstanceFromTemplate:) in the AWS Management Console or with the AWS CLI, for example:
 
 !!!Note "Leave the SSH key pair not specified"
 
@@ -96,13 +96,13 @@ If it launched successfully, the command will return some JSON. Look for the key
 }
 ```
 
-Use this value to connect to the instance:
+To connect in the AWS Management Console, open [EC2 > Instances](https://376129434881-cvwoy6d4.eu-north-1.console.aws.amazon.com/ec2/home?region=eu-north-1#Instances:), select the instance, and choose **Connect > Session Manager > Connect**. Alternatively, use the instance ID with the AWS CLI:
 
 ```sh title="shell"
 aws ssm start-session --target i-03e1eb484512d1b89
 ```
 
-When you are done with the instance, make sure you terminate it:
+When you are done with the instance, terminate it from [EC2 > Instances](https://376129434881-cvwoy6d4.eu-north-1.console.aws.amazon.com/ec2/home?region=eu-north-1#Instances:) by choosing **Instance state > Terminate instance**, or use the AWS CLI:
 
 ```sh title="shell"
 aws ec2 terminate-instances --instance-ids i-03e1eb484512d1b89

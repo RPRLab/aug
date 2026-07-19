@@ -49,7 +49,7 @@ These resources already exist. Recreate or replace them only as part of a review
 
 To recreate the IAM role and instance profile in the `research` account:
 
-1. Open **IAM > Roles** and choose **Create role**.
+1. Open [IAM > Roles](https://376129434881-cvwoy6d4.eu-north-1.console.aws.amazon.com/iam/home#/roles) and choose **Create role**.
 
 2. Select **AWS service** with the **EC2** use case.
 
@@ -61,7 +61,7 @@ To recreate the IAM role and instance profile in the `research` account:
 
 To recreate the security group:
 
-1. Open **EC2 > Network & Security > Security Groups** in the `research` account and correct VPC.
+1. Open [EC2 > Network & Security > Security Groups](https://376129434881-cvwoy6d4.eu-north-1.console.aws.amazon.com/ec2/home?region=eu-north-1#SecurityGroups:) in the `research` account and correct VPC.
 
 2. Create `rprlab-session-manager-only`.
 
