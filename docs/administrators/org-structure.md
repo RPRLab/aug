@@ -23,6 +23,40 @@ Each account uses a lab-controlled root recovery mailbox. The exact addresses an
 
     Owners must instead use IAM Identity Center and temporary role credentials, as with other research or administrative tasks. Root access is reserved for tasks that explicitly require it.
 
+## Centralizing IAM Identity Center
+
+The lab keeps users and account access centrally managed through one organization instance of IAM Identity Center in the `rprlab` account. This service control policy (SCP) prevents member accounts such as `research` from creating separate Identity Center instances.
+
+To create and attach the guardrail:
+
+1.  Navigate to [AWS Organizations > Policies > Service control policies](https://986542260596-qogog24k.us-east-1.console.aws.amazon.com/organizations/v2/home/policies/service-control-policy). If service control policies are not yet enabled, choose **Enable service control policies**.
+
+2.  Choose **Create policy**.
+
+3.  On the **Create new service control policy** page, enter: **Policy name:** `DenyMemberAccountInstances` and **Policy description:** `Prevent creation of new account instances of IAM Identity Center`
+
+4.  Replace the policy editor's contents with the following, and choose **Create policy**:
+
+    ```json
+    {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "DenyMemberAccountInstances",
+          "Effect": "Deny",
+          "Action": "sso:CreateInstance",
+          "Resource": "*"
+        }
+      ]
+    }
+    ```
+
+5.  On the new `DenyMemberAccountInstances` policy page, open the **Targets** tab and choose **Attach**.
+
+6.  Select the organization root at the top of the account hierarchy and choose **Attach policy**.
+
+See AWS's guidance on [using SCPs to control account-instance creation](https://docs.aws.amazon.com/singlesignon/latest/userguide/control-account-instance.html) and [attaching organization policies](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_policies_attach.html) for the supported workflows and policy variants.
+
 ## Groups and permission sets
 
 Human access is centrally managed from [IAM Identity Center](https://986542260596-qogog24k.eu-north-1.console.aws.amazon.com/singlesignon/home?region=eu-north-1#/instances/6508293e3330524d/dashboard) in the management account. Assign account access to groups rather than directly to individual users.
