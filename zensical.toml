@@ -19,6 +19,7 @@ nav = [
     { Introduction = "administrators/introduction.md" },
     { "Organization Structure" = "administrators/org-structure.md" },
     { "Identity and Access" = "administrators/identity-access.md" },
+    { "Billing" = "administrators/billing.md" },
     { "Resource Standards" = "administrators/resource-standards.md" },
     { "EC2 Security" = "administrators/ec2-security.md" },
     { "AMIs and Launch Templates" = "administrators/amis.md" },
