@@ -1,10 +1,10 @@
-# RPR Lab AWS User's Group Documentation
+# RPR Lab AWS Users' Group Documentation
 
 > Documentation for researchers and administrators using the RPR Lab AWS environment. Use these Markdown sources together so answers reflect the lab's access model, security requirements, resource standards, and operational guidance.
 
 ## Overview
 
-- [AWS User's Group overview](https://raw.githubusercontent.com/rprlab/aug/main/docs/index.md): Entry point, roles, support, and access portal.
+- [AWS Users' Group overview](https://raw.githubusercontent.com/rprlab/aug/main/docs/index.md): Entry point, roles, support, and access portal.
 
 ## Researchers
 

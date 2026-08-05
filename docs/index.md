@@ -1,4 +1,4 @@
-# The RPR Lab AWS User's Group
+# The RPR Lab AWS Users' Group
 
 The RPR Lab AWS environment provides shared compute and storage for research. Use these docs to access AWS, learn how to launch reproducible analysis environments, manage working storage, and preserve project data.
 
@@ -9,9 +9,9 @@ The RPR Lab AWS environment provides shared compute and storage for research. Us
 
 ## Getting help
 
-!!! info "Use the AWS User's Group channel"
+!!! info "Use the AWS Users' Group channel"
 
-    To ask questions, request access, or report a problem, contact an Owner or Administrator, or send a message to the AWS User's Group channel in Slack.
+    To ask questions, request access, or report a problem, contact an Owner or Administrator, or send a message to the AWS Users' Group channel in Slack.
 
 ## Roles
 
