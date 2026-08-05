@@ -1,11 +1,11 @@
 [project]
-site_name = "AWS User's Group"
+site_name = "AWS Users' Group"
 site_url = "https://rprlab.github.io/aug/"
-site_description = "Documentation for the RPR Lab AWS User's Group"
+site_description = "Documentation for the RPR Lab AWS Users' Group"
 repo_name = "rprlab/aug"
 repo_url = "https://github.com/rprlab/aug"
 edit_uri = "https://github.com/rprlab/aug/edit/main/docs/"
-copyright = "Copyright &copy; 2026 RPR Lab AWS User's Group"
+copyright = "Copyright &copy; 2026 RPR Lab AWS Users' Group"
 nav = [
   { Home = "index.md" },
   { "Researchers" = [

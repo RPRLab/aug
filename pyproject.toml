@@ -1,7 +1,7 @@
 [project]
 name = "aug"
 version = "0.1.0"
-description = "Documentation site for the RPR Lab AWS User's Group"
+description = "Documentation site for the RPR Lab AWS Users' Group"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [

@@ -1,6 +1,6 @@
-# RPR Lab AWS User's Group
+# RPR Lab AWS Users' Group
 
-Documentation for the RPR Lab AWS User's Group, built with [Zensical](https://zensical.org/) and published at <https://rprlab.github.io/aug/>.
+Documentation for the RPR Lab AWS Users' Group, built with [Zensical](https://zensical.org/) and published at <https://rprlab.github.io/aug/>.
 
 ## Local development
 

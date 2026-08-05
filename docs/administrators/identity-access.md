@@ -50,7 +50,7 @@ Change access through group membership:
 
 - To suspend all access without immediately deleting the identity, disable user access or remove all account assignments while the situation is reviewed.
 
-After any privilege change, verify the user's group memberships and account assignments under [IAM Identity Center > Users](https://986542260596-qogog24k.eu-north-1.console.aws.amazon.com/singlesignon/home?region=eu-north-1#/instances/6508293e3330524d/users). Record who approved administrator access and when it was granted or removed.
+After any privilege change, verify the users' group memberships and account assignments under [IAM Identity Center > Users](https://986542260596-qogog24k.eu-north-1.console.aws.amazon.com/singlesignon/home?region=eu-north-1#/instances/6508293e3330524d/users). Record who approved administrator access and when it was granted or removed.
 
 ## Off-boarding
 
