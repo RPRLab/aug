@@ -4,22 +4,20 @@ icon: lucide/info
 
 # Introduction
 
-##
-
-To get access to the lab AWS environment contact one of the [Owners](../index.md#aws-owners) or [Administrators](../index.md#aws-administrators).
+To get access to the lab AWS environment, contact one of the [Owners](../index.md#aws-owners) or [Administrators](../index.md#aws-administrators).
 
 ## In brief
 
-Amazon Web Services (AWS) is a set of on-demand cloud-based products, including compute, storage, databases (and more). We have set up a shared AWS environment for the lab that provides a platform for running analyses, storing data, and sharing computational resources.
+Amazon Web Services (AWS) provides on-demand compute and storage. The lab's shared AWS environment supports running analyses, storing data, and sharing computational resources.
 
-You will primarily be interacting with the lab’s AWS environment through three services: [Elastic Compute Cloud (EC2)](../researchers/ec2.md), [Elastic Block Store (EBS)](../researchers/ebs.md), and [Simple Storage Service (S3)](../researchers/s3.md). EC2 provides temporary virtual computers for running analyses. EBS provides the attached disk storage used by those computers while they are running. S3 provides long-term shared storage for data and results.
+[EC2](ec2.md) provides temporary virtual computers for running analyses. [EBS](ebs.md) provides their attached working storage, while [S3](s3.md) provides long-term shared storage for data and results.
 
-Explore the topics in these docs to learn more about making the most out of AWS.
+[SageMaker](sagemaker.md) provides managed Spot jobs for suitable containerized workloads. [ECR](ecr.md) stores the container images used by those jobs. Researchers can create repositories for their tools and run jobs using the lab's approved execution role.
 
-[SageMaker AI](sagemaker.md) also provides managed Spot jobs for suitable containerized workloads, using the lab's approved execution role.
+Explore these guides to choose the services and workflow suited to your analysis.
 
 <br>
 
-[Learn how to access AWS](../researchers/accessing-aws.md){ .md-button .md-button--primary }
+[Learn how to access AWS](accessing-aws.md){ .md-button .md-button--primary }
 
 <br>

@@ -81,7 +81,7 @@ aws ec2 run-instances \
         ]"
 ```
 
-If it launched successfully, the command will return some JSON. Look for the key `InstanceID` and take note of the value, e.g., `i-03e1eb484512d1b89`:
+If it launched successfully, the command will return some JSON. Look for the key `InstanceId` and take note of the value, e.g., `i-03e1eb484512d1b89`:
 
 ```json title="shell" hl_lines="8"
 {
@@ -138,7 +138,7 @@ If you need a nonstandard instance configuration, e.g., larger storage, more CPU
 
 Select `rprlab-ec2-research-instance-role` as the instance profile to provide Session Manager and S3 access.
 
-If you find the resources provided by our approved launch templates are consistently not fit for your purposes, talk to an an [Owner](../index.md#aws-owners) or [Administrator](../index.md#aws-administrators) so we can configure a more appropriate template. It is preferred that we work together to establish reusable AMIs and launch templates to forecast costs and build an organized and maximally useful ecosystem for all users.
+If you find the resources provided by our approved launch templates are consistently not fit for your purposes, talk to an [Owner](../index.md#aws-owners) or [Administrator](../index.md#aws-administrators) so we can configure a more appropriate template. It is preferred that we work together to establish reusable AMIs and launch templates to forecast costs and build an organized and maximally useful ecosystem for all users.
 
 You can launch instances from AMIs from the [AWS Management Console](https://console.aws.amazon.com/ec2/home?region=eu-north-1#Images:) or the AWS CLI:
 
@@ -147,7 +147,7 @@ aws ec2 run-instances \
     --image-id ami-0438575438cea9d9f \
     --instance-type t3.large \
     --iam-instance-profile Name=rprlab-ec2-research-instance-role \
-    --security-group-ids sg-077c3d89ca8f32618
+    --security-group-ids sg-077c3d89ca8f32618 \
     --tag-specifications \
         "ResourceType=instance,Tags=[
             {Key=Owner,Value=leightonpayne},

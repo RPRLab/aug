@@ -5,9 +5,9 @@ tags:
   - Compute
 ---
 
-# SageMaker AI
+# SageMaker
 
-SageMaker runs containerized jobs on managed compute and shuts down that compute when the job ends. The lab uses **Managed Spot Training jobs** as an alternative to EC2 for suitable workloads. This workflow does not require Studio, notebooks, or a persistent endpoint.
+SageMaker runs containerized jobs on managed compute and shuts down that compute when the job ends. The lab uses **Managed Spot Training jobs**, which can also run predictions with an existing model.
 
 ## Lab configuration
 
@@ -19,22 +19,34 @@ Use the `research` account (`376129434881`) in Stockholm (`eu-north-1`).
 | Container image | `376129434881.dkr.ecr.eu-north-1.amazonaws.com/rprlab/<tool>:<version>` |
 | Project data and results | `s3://rprlab-research-376129434881-eu-north-1-an/projects/<project>/` |
 
-Use the [shared container registry](ecr.md); `rprlab/af3` is the existing AF3 repository. Submit jobs using your own [ResearcherAccess SSO session](accessing-aws.md). The execution role is for the job itself; the EC2 instance role does not have permission to submit jobs with it.
+Submit jobs using your own [ResearcherAccess SSO session](accessing-aws.md) and select the execution role above for the job.
 
-Set inputs, outputs, checkpoints, and any SDK source-code uploads to paths in the lab research bucket; the execution role cannot access an SDK-created `sagemaker-*` staging bucket.
+Set inputs, outputs, checkpoints, and SDK source-code uploads explicitly to the lab bucket, following the [S3 layout](s3.md#where-data-belongs). Override the SDK's default staging bucket.
 
 ## Running a job
 
-1. Prepare and push a versioned [SageMaker-compatible container](https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-training-algo-dockerfile.html) to the appropriate `rprlab/<tool>` repository. An EC2 AMI cannot be used directly. Keep project data and large reference databases in S3.
+1. Build a [SageMaker-compatible container](https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-training-algo-dockerfile.html) and push a versioned image to your tool's [ECR repository](ecr.md).
 
-2. Check the **SageMaker training Spot quota** for the exact instance type in `eu-north-1`. EC2 quotas and SageMaker endpoint or processing quotas are separate; a quota does not guarantee available Spot capacity.
+2. Check the **SageMaker training Spot quota** for the exact instance type in `eu-north-1`.
 
-3. Create a training job through the CLI or SDK using the role above, `EnableManagedSpotTraining=true`, and finite `MaxRuntimeInSeconds` and `MaxWaitTimeInSeconds` limits. Set the wait limit higher than the runtime limit. Add `Owner` and `Project` tags and use a unique project output prefix.
+3. Submit a small pilot job through the CLI or SDK, using the execution role above and the settings below.
 
-4. Run a small pilot, check its results, CloudWatch logs, and actual cost before scaling. Handle interruptions so completed work is preserved. SageMaker Spot pricing differs from EC2 Spot pricing.
+4. Check the results, CloudWatch logs, and actual cost before scaling. Save completed work to S3 so it survives Spot interruptions.
 
-Follow the [S3 layout](s3.md#where-data-belongs) and [resource standards](../administrators/resource-standards.md). The job role can read and write throughout the research bucket, including overwriting existing files, but cannot delete objects or administer the bucket. Coordinate changes to shared data.
+| Job setting | Required value |
+| --- | --- |
+| `EnableManagedSpotTraining` | `true` |
+| `MaxRuntimeInSeconds` | A finite runtime limit |
+| `MaxWaitTimeInSeconds` | A finite wait limit higher than the runtime limit |
+| Tags | `Owner` and `Project`, following the [resource standards](../administrators/resource-standards.md#required-tags) |
+| Output location | A unique prefix within the project's S3 location |
 
-See AWS's [Managed Spot Training guide](https://docs.aws.amazon.com/sagemaker/latest/dg/model-managed-spot-training.html) and [input/output paths](https://docs.aws.amazon.com/sagemaker/latest/dg/model-train-storage-env-var-summary.html) when adapting a container. AF3 still needs a compatible container and a successful pilot; access alone does not verify the workload.
+Use SageMaker training Spot quotas and prices; these are separate from EC2.
 
-If you need a custom VPC, a customer-managed KMS key, or a different SageMaker workflow, contact an [Administrator](../index.md#aws-administrators). Shared infrastructure and permissions are maintained through the [administrator setup](../administrators/sagemaker.md).
+!!!Warning "Shared bucket access"
+
+    Jobs can overwrite files throughout the research bucket. Coordinate changes to shared data and follow the [worker access guidance](s3.md#access-from-ec2).
+
+See AWS's [Managed Spot Training guide](https://docs.aws.amazon.com/sagemaker/latest/dg/model-managed-spot-training.html) and [input/output paths](https://docs.aws.amazon.com/sagemaker/latest/dg/model-train-storage-env-var-summary.html) when adapting a container.
+
+Administrators maintain the [execution role and access](../administrators/sagemaker.md).
