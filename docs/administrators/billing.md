@@ -32,17 +32,27 @@ By default, IAM users and roles cannot open the Billing and Cost Management cons
 
 Activating IAM access enables IAM identities to use the billing console; it does not grant billing permissions by itself. The existing `AdministratorAccess` assignment supplies those permissions for the `Administrators` group. If billing access is later delegated through a narrower permission set, grant only the required billing and cost-management actions.
 
-## Advance pay
+## Advance Pay
+
+AWS uses the Advance Pay balance to pay invoices when they fall due. If the balance runs out, AWS uses the default payment method.
 
 ### Setup
 
+1. Sign in to the `rprlab` management account with `AdministratorAccess` and open [Billing and Cost Management](https://console.aws.amazon.com/costmanagement/).
+
+2. Choose **Payments > Advance Pay**. If the account is not registered, review and accept the Advance Pay terms, then choose **Register**.
+
+Availability depends on the account's seller of record. AWS Europe requires an AWS Europe invoice; see the [AWS Advance Pay guide](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-advancepay.html) if the tab is missing.
+
 ### Adding funds
 
-1. Open [Billing and Cost Management](https://console.aws.amazon.com/billing/home?#/account) from the `rprlab` management account.
+1. Under **Payments > Advance Pay**, choose **Add funds**.
 
-2. Navigate to **Billing and Payments** and click **Add payment method**.
+2. Enter the funding amount and select an available payment method.
 
-3. [Billing and Cost Management](https://console.aws.amazon.com/billing/home#/paymentsoverview/payments-due)
+3. Follow the funding instructions. For a wire transfer, download the funding summary and use the bank details and reference provided by AWS to complete the transfer.
+
+4. Confirm that the funds appear in the Advance Pay balance.
 
 ## Reviewing costs
 

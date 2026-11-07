@@ -12,6 +12,8 @@ The AWS Management Console is a web-based application that provides access to al
 
 [https://ssoins-6508293e3330524d.portal.eu-north-1.app.aws](https://ssoins-6508293e3330524d.portal.eu-north-1.app.aws)
 
+For research work, choose the `research` account with `ResearcherAccess` and use Stockholm (`eu-north-1`) for regional services. General console links in these docs do not specify an account or role, so check the console header before acting.
+
 ## Installing the AWS CLI
 
 You can essentially do everything through the Management Console, but if you instead want to interact with AWS via the command line, you will need to install the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) and the [Session Manager plugin](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html).
