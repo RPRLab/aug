@@ -51,7 +51,7 @@ The lab's private research bucket uses an account- and Region-specific name. Pre
 
 When a user leaves, review and remove their `users/<username>/` content after transferring anything that belongs in `projects/` or `shared/`.
 
-The [shared EC2 instance role](ec2-security.md#research-bucket-access) has read/write access throughout this bucket, including shared databases and other users' prefixes. This is a shared lab access model: prefixes and instance tags do not enforce project or user isolation. Workloads may upload and overwrite objects, but the role does not grant object deletion or bucket administration. Storage layout and coordination with data maintainers remain required even when a write is technically permitted.
+See [EC2 bucket access](ec2-security.md#research-bucket-access) for the shared worker permissions.
 
 ## AMI content
 
