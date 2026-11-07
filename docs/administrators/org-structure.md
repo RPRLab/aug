@@ -74,11 +74,17 @@ See [Identity and access management](../administrators/identity-access.md) for a
 
 ## ResearcherAccess inline permissions
 
-The AWS-managed `PowerUserAccess` policy already permits SageMaker and ECR operations, but does not allow researchers to pass workload roles. The inline policy below allows researchers to view EC2 instance profiles and pass the approved EC2 and [SageMaker](../researchers/sagemaker.md) roles only to their respective services.
+The AWS-managed `PowerUserAccess` policy already permits SageMaker and ECR operations, but does not allow researchers to pass workload roles. The inline policy below allows researchers to view EC2 instance profiles and pass the approved EC2 and [SageMaker](sagemaker.md) roles only to their respective services.
 
-Edit this, and other policies from the `rprlab` management account under [IAM Identity Center > Multi-account permissions > Permission sets](https://986542260596-qogog24k.eu-north-1.console.aws.amazon.com/singlesignon/home?region=eu-north-1#/instances/6508293e3330524d/permission-sets).
+To maintain this policy through the AWS Management Console:
 
-After editing, provision the updated permission set to the `research` account (`376129434881`). This changes access for everyone assigned `ResearcherAccess`, including the `Researchers` group.
+1. Sign in to the `rprlab` management account with `AdministratorAccess` and open [IAM Identity Center > Multi-account permissions > Permission sets](https://986542260596-qogog24k.eu-north-1.console.aws.amazon.com/singlesignon/home?region=eu-north-1#/instances/6508293e3330524d/permission-sets).
+
+2. Open `ResearcherAccess`, find **Inline policy** under **Permissions**, and choose **Edit**. Use the JSON below, preserving any other approved statements, then choose **Save changes**.
+
+3. Check that the permission set is up to date in the `research` account (`376129434881`). If an update is required, open **AWS accounts > research > Permission sets**, select `ResearcherAccess`, and choose **Update**. On the confirmation page, choose **Update**, then verify provisioning succeeds.
+
+This changes access for everyone assigned `ResearcherAccess`, including the `Researchers` group.
 
 ```json
 {
