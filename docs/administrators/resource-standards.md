@@ -51,6 +51,8 @@ The lab's private research bucket uses an account- and Region-specific name. Pre
 
 When a user leaves, review and remove their `users/<username>/` content after transferring anything that belongs in `projects/` or `shared/`.
 
+See [EC2 bucket access](ec2-security.md#research-bucket-access) for the shared worker permissions.
+
 ## AMI content
 
 Administrators maintain official AMIs for standard software foundations and specific applications. Researchers should launch them through approved launch templates.
@@ -60,6 +62,8 @@ Do not bake large reference databases, project inputs, or analysis outputs into 
 When an AMI is retired, deregister it under [EC2 > Images > AMIs](https://console.aws.amazon.com/ec2/home?region=eu-north-1#Images:) and review its backing storage under [EC2 > Elastic Block Store > Snapshots](https://console.aws.amazon.com/ec2/home?region=eu-north-1#Snapshots:).
 
 ## Launch templates are the supported interface
+
+These requirements apply to EC2. For managed jobs, follow the [SageMaker container and execution-role workflow](../researchers/sagemaker.md).
 
 Launch templates should provide the complete safe configuration for an approved environment:
 
