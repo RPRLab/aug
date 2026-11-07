@@ -57,13 +57,13 @@ Check the current rate for the intended instance type and operating system on th
 
 !!!Success "This is the recommended method for launching instances"
 
-Most users should launch an EC2 instance from one of the provided launch templates: [EC2 > Instances > Launch Templates](https://376129434881-cvwoy6d4.eu-north-1.console.aws.amazon.com/ec2/home?region=eu-north-1#LaunchTemplates:tag:Owner=admin;v=3;$case=tags:false%5C,client:false;$regex=tags:false%5C,client:false). These templates have been set up by administrators to ensure that reasonable resources are requested and created [EBS volumes](../researchers/ebs.md) are deleted on termination. They also set the necessary network settings and IAM profiles for connecting to the instance through SSM Session Manager rather than SSH.
+Most users should launch an EC2 instance from one of the provided launch templates: [EC2 > Instances > Launch Templates](https://console.aws.amazon.com/ec2/home?region=eu-north-1#LaunchTemplates:tag:Owner=admin;v=3;$case=tags:false%5C,client:false;$regex=tags:false%5C,client:false). These templates have been set up by administrators to ensure that reasonable resources are requested and created [EBS volumes](../researchers/ebs.md) are deleted on termination. They also set the necessary network settings and IAM profiles for connecting to the instance through SSM Session Manager rather than SSH.
 
 Choose the smallest template that can reasonably run your job. [Upload final outputs to S3](../researchers/s3.md#uploading-files) and terminate the instance when finished.
 
 With any instances you create, it is expected that you assign an `Owner` tag with your username, and a `Project` tag with a short code that will help identify the purpose of the instance. This way, if instances are left running or stopped, we can more easily triage what can safely be terminated.
 
-You can launch templates from [EC2 > Instances > Launch Templates > Launch instance from template](https://376129434881-cvwoy6d4.eu-north-1.console.aws.amazon.com/ec2/home?region=eu-north-1#LaunchInstanceFromTemplate:) in the AWS Management Console or with the AWS CLI, for example:
+You can launch templates from [EC2 > Instances > Launch Templates > Launch instance from template](https://console.aws.amazon.com/ec2/home?region=eu-north-1#LaunchInstanceFromTemplate:) in the AWS Management Console or with the AWS CLI, for example:
 
 !!!Note "Leave the SSH key pair not specified"
 
@@ -96,13 +96,13 @@ If it launched successfully, the command will return some JSON. Look for the key
 }
 ```
 
-To connect in the AWS Management Console, open [EC2 > Instances](https://376129434881-cvwoy6d4.eu-north-1.console.aws.amazon.com/ec2/home?region=eu-north-1#Instances:), select the instance, and choose **Connect > Session Manager > Connect**. Alternatively, use the instance ID with the AWS CLI:
+To connect in the AWS Management Console, open [EC2 > Instances](https://console.aws.amazon.com/ec2/home?region=eu-north-1#Instances:), select the instance, and choose **Connect > Session Manager > Connect**. Alternatively, use the instance ID with the AWS CLI:
 
 ```sh title="shell"
 aws ssm start-session --target i-03e1eb484512d1b89
 ```
 
-When you are done with the instance, terminate it from [EC2 > Instances](https://376129434881-cvwoy6d4.eu-north-1.console.aws.amazon.com/ec2/home?region=eu-north-1#Instances:) by choosing **Instance state > Terminate instance**, or use the AWS CLI:
+When you are done with the instance, terminate it from [EC2 > Instances](https://console.aws.amazon.com/ec2/home?region=eu-north-1#Instances:) by choosing **Instance state > Terminate instance**, or use the AWS CLI:
 
 ```sh title="shell"
 aws ec2 terminate-instances --instance-ids i-03e1eb484512d1b89
@@ -130,13 +130,13 @@ The command will return some JSON. Make sure the `CurrentState` is `shutting-dow
 
 ### Launching a custom EC2 instance with an approved AMI
 
-!!!Warning "This method is not recommended unless you are experienced with AWS, familiar with [instance types](https://376129434881-cvwoy6d4.eu-north-1.console.aws.amazon.com/ec2/home?region=eu-north-1#InstanceTypes:), [EBS volumes](../researchers/ebs.md) and understand the lab's [EC2 security setup](../administrators/ec2-security.md)"
+!!!Warning "This method is not recommended unless you are experienced with AWS, familiar with [instance types](https://console.aws.amazon.com/ec2/home?region=eu-north-1#InstanceTypes:), [EBS volumes](../researchers/ebs.md) and understand the lab's [EC2 security setup](../administrators/ec2-security.md)"
 
-If you need a nonstandard instance configuration, e.g., larger storage, more CPU, GPU, or memory, you can launch one of the lab AMIs with a custom instance: [EC2 > Images > AMIs](https://376129434881-cvwoy6d4.eu-north-1.console.aws.amazon.com/ec2/home?region=eu-north-1#Images:). Users who bypass the launch template are responsible for confirming that temporary EBS volumes are deleted on termination and excessive resources are not requested or left running. Creating, modifying, and retiring AMIs is an [administrator responsibility](../administrators/amis.md).
+If you need a nonstandard instance configuration, e.g., larger storage, more CPU, GPU, or memory, you can launch one of the lab AMIs with a custom instance: [EC2 > Images > AMIs](https://console.aws.amazon.com/ec2/home?region=eu-north-1#Images:). Users who bypass the launch template are responsible for confirming that temporary EBS volumes are deleted on termination and excessive resources are not requested or left running. Creating, modifying, and retiring AMIs is an [administrator responsibility](../administrators/amis.md).
 
 If you find the resources provided by our approved launch templates are consistently not fit for your purposes, talk to an an [Owner](../index.md#aws-owners) or [Administrator](../index.md#aws-administrators) so we can configure a more appropriate template. It is preferred that we work together to establish reusable AMIs and launch templates to forecast costs and build an organized and maximally useful ecosystem for all users.
 
-You can launch instances from AMIs from the [AWS Management Console](https://376129434881-cvwoy6d4.eu-north-1.console.aws.amazon.com/ec2/home?region=eu-north-1#Images:) or the AWS CLI:
+You can launch instances from AMIs from the [AWS Management Console](https://console.aws.amazon.com/ec2/home?region=eu-north-1#Images:) or the AWS CLI:
 
 ```sh title="shell"
 aws ec2 run-instances \

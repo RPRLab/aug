@@ -41,7 +41,7 @@ The AMIs used by the lab are EBS-backed. When an AMI is created from an instance
 
 The quality and size of an AMI depend on the state of its source instance.
 
-To launch an EC2 instance, in the `research` account, navigate to [EC2 > Instances > Launch instances](https://376129434881-cvwoy6d4.eu-north-1.console.aws.amazon.com/ec2/home?region=eu-north-1#Instances:)
+To launch an EC2 instance, in the `research` account, navigate to [EC2 > Instances > Launch instances](https://console.aws.amazon.com/ec2/home?region=eu-north-1#Instances:)
 
 Under **Name and tags**, give the instance a temporary name (e.g., `ami-build`).
 
@@ -65,7 +65,7 @@ Check disk use with `df -h` and confirm that the root volume is sensibly sized.
 
 ### Creating the AMI
 
-Once the instance is prepared, select it under [EC2 > Instances](https://376129434881-cvwoy6d4.eu-north-1.console.aws.amazon.com/ec2/home?region=eu-north-1#Instances:), choose **Instance state > Stop instance**, then choose **Actions > Image and templates > Create image**.
+Once the instance is prepared, select it under [EC2 > Instances](https://console.aws.amazon.com/ec2/home?region=eu-north-1#Instances:), choose **Instance state > Stop instance**, then choose **Actions > Image and templates > Create image**.
 
 Under **Image details**, give the AMI a stable name containing the platform, application and a version, for example:
 
@@ -81,7 +81,7 @@ Also apply the following tags to shared AMIs and their snapshots:
 
 - `Version` as the date in [ISO format](https://www.iso.org/iso-8601-date-and-time-format.html).
 
-Depending on the size of the final volume, it may take minutes to hours to complete the snapshot. Check progress under [EC2 > Images > AMIs](https://376129434881-cvwoy6d4.eu-north-1.console.aws.amazon.com/ec2/home?region=eu-north-1#Images:) by opening the AMI details, choosing **Storage**, and selecting the snapshot device ID (for example, `snap-xxxxxxxxxxxxxxxxx`).
+Depending on the size of the final volume, it may take minutes to hours to complete the snapshot. Check progress under [EC2 > Images > AMIs](https://console.aws.amazon.com/ec2/home?region=eu-north-1#Images:) by opening the AMI details, choosing **Storage**, and selecting the snapshot device ID (for example, `snap-xxxxxxxxxxxxxxxxx`).
 
 When the AMI is ready, launch a new test instance from it and verify:
 
@@ -95,7 +95,7 @@ Terminate the test and source instances when they are no longer needed.
 
 ### Creating the launch template
 
-After the AMI has passed testing, create or update a launch template under [EC2 > Instances > Launch Templates](https://376129434881-cvwoy6d4.eu-north-1.console.aws.amazon.com/ec2/home?region=eu-north-1#LaunchTemplates:).
+After the AMI has passed testing, create or update a launch template under [EC2 > Instances > Launch Templates](https://console.aws.amazon.com/ec2/home?region=eu-north-1#LaunchTemplates:).
 
 For a new supported template, choose **Create launch template**.
 
@@ -125,7 +125,7 @@ Under **Resource tags**, apply `LaunchTemplate` as the name of the launch templa
 
 Click **Create launch template**.
 
-Once the template is prepared, select it under [EC2 > Instances > Launch Templates](https://376129434881-cvwoy6d4.eu-north-1.console.aws.amazon.com/ec2/home?region=eu-north-1#LaunchTemplates:), choose **Actions > Launch instance from template**.
+Once the template is prepared, select it under [EC2 > Instances > Launch Templates](https://console.aws.amazon.com/ec2/home?region=eu-north-1#LaunchTemplates:), choose **Actions > Launch instance from template**.
 
 Verify it is working as expected, then terminate the instance.
 
@@ -133,7 +133,7 @@ Consider building additional `small` or `large` templates the up- or down-scale 
 
 ## Updating a launch template
 
-Launch templates can be re-versioned under [EC2 > Instances > Launch Templates](https://376129434881-cvwoy6d4.eu-north-1.console.aws.amazon.com/ec2/home?region=eu-north-1#LaunchTemplates:) by selecting an existing template and choosing **Actions > Modify template (Create new version)**.
+Launch templates can be re-versioned under [EC2 > Instances > Launch Templates](https://console.aws.amazon.com/ec2/home?region=eu-north-1#LaunchTemplates:) by selecting an existing template and choosing **Actions > Modify template (Create new version)**.
 
 When updating, remember to set the new version as the default.
 
@@ -153,4 +153,4 @@ Before deregistering:
 
     Deregistering prevents new instances from being launched from the AMI. Deleting its snapshots removes the stored image data. Existing instances launched from the AMI are not deleted, but they do not make the AMI recoverable.
 
-Under [EC2 > Images > AMIs](https://376129434881-cvwoy6d4.eu-north-1.console.aws.amazon.com/ec2/home?region=eu-north-1#Images:), select the obsolete image, choose **Actions > Deregister AMI**, and select **Delete associated snapshots** only after completing the checks above.
+Under [EC2 > Images > AMIs](https://console.aws.amazon.com/ec2/home?region=eu-north-1#Images:), select the obsolete image, choose **Actions > Deregister AMI**, and select **Delete associated snapshots** only after completing the checks above.

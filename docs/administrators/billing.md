@@ -32,6 +32,18 @@ By default, IAM users and roles cannot open the Billing and Cost Management cons
 
 Activating IAM access enables IAM identities to use the billing console; it does not grant billing permissions by itself. The existing `AdministratorAccess` assignment supplies those permissions for the `Administrators` group. If billing access is later delegated through a narrower permission set, grant only the required billing and cost-management actions.
 
+## Advance pay
+
+### Setup
+
+### Adding funds
+
+1. Open [Billing and Cost Management](https://console.aws.amazon.com/billing/home?#/account) from the `rprlab` management account.
+
+2. Navigate to **Billing and Payments** and click **Add payment method**.
+
+3. [Billing and Cost Management](https://console.aws.amazon.com/billing/home#/paymentsoverview/payments-due)
+
 ## Reviewing costs
 
 Use the following views for routine review:

@@ -29,7 +29,7 @@ The lab keeps users and account access centrally managed through one organizatio
 
 To create and attach the guardrail:
 
-1.  Navigate to [AWS Organizations > Policies > Service control policies](https://986542260596-qogog24k.us-east-1.console.aws.amazon.com/organizations/v2/home/policies/service-control-policy). If service control policies are not yet enabled, choose **Enable service control policies**.
+1.  Navigate to [AWS Organizations > Policies > Service control policies](https://console.aws.amazon.com/organizations/v2/home/policies/service-control-policy). If service control policies are not yet enabled, choose **Enable service control policies**.
 
 2.  Choose **Create policy**.
 
@@ -59,7 +59,7 @@ See AWS's guidance on [using SCPs to control account-instance creation](https://
 
 ## Groups and permission sets
 
-Human access is centrally managed from [IAM Identity Center](https://986542260596-qogog24k.eu-north-1.console.aws.amazon.com/singlesignon/home?region=eu-north-1#/instances/6508293e3330524d/dashboard) in the management account. Assign account access to groups rather than directly to individual users.
+Human access is centrally managed from [IAM Identity Center](https://console.aws.amazon.com/singlesignon/home?region=eu-north-1#/instances/6508293e3330524d/dashboard) in the management account. Assign account access to groups rather than directly to individual users.
 
 | Group            | Assignment                                       | Scope                                          |
 | ---------------- | ------------------------------------------------ | ---------------------------------------------- |
@@ -76,7 +76,7 @@ See [Identity and access management](../administrators/identity-access.md) for a
 
 The AWS-managed `PowerUserAccess` policy does not allow researchers to pass IAM roles to EC2. `ResearcherAccess` therefore adds the following inline policy to the managed policy. It grants the minimum additional access required to view instance profiles and assign the approved `rprlab-ec2-research-instance-role` profile.
 
-Edit this, and other policies from the `rprlab` management account under [IAM Identity Center > Multi-account permissions > Permission sets](https://986542260596-qogog24k.eu-north-1.console.aws.amazon.com/singlesignon/home?region=eu-north-1#/instances/6508293e3330524d/permission-sets).
+Edit this, and other policies from the `rprlab` management account under [IAM Identity Center > Multi-account permissions > Permission sets](https://console.aws.amazon.com/singlesignon/home?region=eu-north-1#/instances/6508293e3330524d/permission-sets).
 
 ```json
 {
