@@ -63,6 +63,8 @@ When an AMI is retired, deregister it under [EC2 > Images > AMIs](https://376129
 
 ## Launch templates are the supported interface
 
+These requirements apply to EC2. For managed jobs, follow the [SageMaker container and execution-role workflow](../researchers/sagemaker.md).
+
 Launch templates should provide the complete safe configuration for an approved environment:
 
 - approved AMI;

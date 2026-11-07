@@ -16,6 +16,8 @@ You will primarily be interacting with the lab’s AWS environment through three
 
 Explore the topics in these docs to learn more about making the most out of AWS.
 
+[SageMaker AI](sagemaker.md) also provides managed Spot jobs for suitable containerized workloads, using the lab's approved execution role.
+
 <br>
 
 [Learn how to access AWS](../researchers/accessing-aws.md){ .md-button .md-button--primary }

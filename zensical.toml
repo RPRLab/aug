@@ -12,6 +12,7 @@ nav = [
     { Introduction = "researchers/introduction.md" },
     { "Accessing AWS" = "researchers/accessing-aws.md" },
     { EC2 = "researchers/ec2.md" },
+    { "SageMaker AI" = "researchers/sagemaker.md" },
     { EBS = "researchers/ebs.md" },
     { S3 = "researchers/s3.md" },
   ] },

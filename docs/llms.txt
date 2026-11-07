@@ -11,6 +11,7 @@
 - [Introduction for researchers](https://raw.githubusercontent.com/rprlab/aug/main/docs/researchers/introduction.md): Core responsibilities and a guide to choosing AWS services.
 - [Accessing AWS](https://raw.githubusercontent.com/rprlab/aug/main/docs/researchers/accessing-aws.md): Browser, CLI, and identity-center access procedures.
 - [Elastic Compute Cloud (EC2)](https://raw.githubusercontent.com/rprlab/aug/main/docs/researchers/ec2.md): Temporary compute, costs, lifecycle, and operating guidance.
+- [SageMaker AI](https://raw.githubusercontent.com/rprlab/aug/main/docs/researchers/sagemaker.md): Managed Spot Training, approved execution role, container repository, and administrator setup.
 - [Elastic Block Store (EBS)](https://raw.githubusercontent.com/rprlab/aug/main/docs/researchers/ebs.md): Block storage behavior, costs, attachment, and lifecycle.
 - [Simple Storage Service (S3)](https://raw.githubusercontent.com/rprlab/aug/main/docs/researchers/s3.md): Durable object storage, data movement, and usage guidance.
 

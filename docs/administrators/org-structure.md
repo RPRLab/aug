@@ -74,9 +74,11 @@ See [Identity and access management](../administrators/identity-access.md) for a
 
 ## ResearcherAccess inline permissions
 
-The AWS-managed `PowerUserAccess` policy does not allow researchers to pass IAM roles to EC2. `ResearcherAccess` therefore adds the following inline policy to the managed policy. It grants the minimum additional access required to view instance profiles and assign the approved `rprlab-ec2-research-instance-role` profile.
+The AWS-managed `PowerUserAccess` policy already permits SageMaker and ECR operations, but does not allow researchers to pass workload roles. The inline policy below allows researchers to view EC2 instance profiles and pass the approved EC2 and [SageMaker](../researchers/sagemaker.md) roles only to their respective services.
 
 Edit this, and other policies from the `rprlab` management account under [IAM Identity Center > Multi-account permissions > Permission sets](https://986542260596-qogog24k.eu-north-1.console.aws.amazon.com/singlesignon/home?region=eu-north-1#/instances/6508293e3330524d/permission-sets).
+
+After editing, provision the updated permission set to the `research` account (`376129434881`). This changes access for everyone assigned `ResearcherAccess`, including the `Researchers` group.
 
 ```json
 {
@@ -100,6 +102,17 @@ Edit this, and other policies from the `rprlab` management account under [IAM Id
       "Condition": {
         "StringEquals": {
           "iam:PassedToService": "ec2.amazonaws.com"
+        }
+      }
+    },
+    {
+      "Sid": "AllowPassingApprovedSageMakerRole",
+      "Effect": "Allow",
+      "Action": "iam:PassRole",
+      "Resource": "arn:aws:iam::376129434881:role/rprlab-sagemaker-research-execution-role",
+      "Condition": {
+        "StringEquals": {
+          "iam:PassedToService": "sagemaker.amazonaws.com"
         }
       }
     }

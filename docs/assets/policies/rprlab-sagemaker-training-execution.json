@@ -1,0 +1,45 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AuthenticateToECR",
+      "Effect": "Allow",
+      "Action": "ecr:GetAuthorizationToken",
+      "Resource": "*"
+    },
+    {
+      "Sid": "PullApprovedTrainingImage",
+      "Effect": "Allow",
+      "Action": [
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:GetDownloadUrlForLayer",
+        "ecr:BatchGetImage"
+      ],
+      "Resource": "arn:aws:ecr:eu-north-1:376129434881:repository/rprlab/af3"
+    },
+    {
+      "Sid": "CreateAndDescribeTrainingLogGroup",
+      "Effect": "Allow",
+      "Action": [
+        "logs:CreateLogGroup",
+        "logs:DescribeLogStreams"
+      ],
+      "Resource": "arn:aws:logs:eu-north-1:376129434881:log-group:/aws/sagemaker/TrainingJobs:*"
+    },
+    {
+      "Sid": "WriteTrainingLogStreams",
+      "Effect": "Allow",
+      "Action": [
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+      ],
+      "Resource": "arn:aws:logs:eu-north-1:376129434881:log-group:/aws/sagemaker/TrainingJobs:log-stream:*"
+    },
+    {
+      "Sid": "PublishTrainingMetrics",
+      "Effect": "Allow",
+      "Action": "cloudwatch:PutMetricData",
+      "Resource": "*"
+    }
+  ]
+}
