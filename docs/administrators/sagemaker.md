@@ -9,7 +9,7 @@ tags:
 
 # SageMaker access
 
-Administrators maintain the container repository and execution role used by the lab's SageMaker training jobs. Researchers submit jobs through their own `ResearcherAccess` session; the execution role supplies permissions to the running job.
+Administrators maintain the execution role used by the lab's SageMaker training jobs. Researchers submit jobs through their own `ResearcherAccess` session; the execution role supplies permissions to the running job.
 
 The resources below already exist. These console instructions describe how to maintain or recreate them. CloudShell is not required. Research usage is documented under [SageMaker AI](../researchers/sagemaker.md).
 
@@ -20,21 +20,12 @@ Maintain these resources in the `research` account (`376129434881`), using Stock
 | Resource | Name | Purpose |
 | --- | --- | --- |
 | IAM execution role | `rprlab-sagemaker-research-execution-role` | Used only by SageMaker training jobs in this account and Region |
-| Customer managed policy | `rprlab-sagemaker-training-execution` | Pulls the approved container and writes training logs and metrics |
+| Customer managed policy | `rprlab-sagemaker-training-execution` | Pulls images from `rprlab/*` repositories and writes training logs and metrics |
 | Customer managed policy | `rprlab-ec2-research-s3-read-write` | Supplies read/write access throughout the research bucket |
-| Private ECR repository | `rprlab/af3` | Stores versioned AF3 container images |
 
 The execution role can overwrite objects anywhere in the research bucket, but cannot delete objects or administer the bucket. Use it only for workloads trusted with the whole bucket. The current setup supports training jobs without a custom VPC or customer-managed KMS key.
 
-## Creating the container repository
-
-1. Open [Amazon ECR](https://eu-north-1.console.aws.amazon.com/ecr/home?region=eu-north-1) in the `research` account, choose **Private repositories**, then **Create repository**.
-
-2. Name the repository `rprlab/af3`. Choose **Immutable** image tags without exclusions and **AES-256** encryption, then choose **Create repository**.
-
-3. Apply the [standard ownership tags](resource-standards.md#required-tags) to the repository: `Owner=admin`, `Project=shared`, and `Version` as the creation date.
-
-Researchers upload images using their SSO session. The execution role only pulls images. Each build needs a new image tag.
+Container repositories and image retention follow the [ECR setup](ecr.md). The execution role can pull from all current and future `rprlab/` repositories in this account and Region, but cannot push or delete images.
 
 ## Creating the execution role
 

@@ -15,7 +15,7 @@
         "ecr:GetDownloadUrlForLayer",
         "ecr:BatchGetImage"
       ],
-      "Resource": "arn:aws:ecr:eu-north-1:376129434881:repository/rprlab/af3"
+      "Resource": "arn:aws:ecr:eu-north-1:376129434881:repository/rprlab/*"
     },
     {
       "Sid": "CreateAndDescribeTrainingLogGroup",
