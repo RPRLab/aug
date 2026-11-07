@@ -36,7 +36,7 @@ Stopping is appropriate only when an instance will be resumed soon. Stopped inst
 
 Volumes created for approved research instances must default to `DeleteOnTermination = true`. Exceptions require a clear owner, project, retention purpose, and cleanup date.
 
-Administrators should periodically review [EC2 > Elastic Block Store > Volumes](https://376129434881-cvwoy6d4.eu-north-1.console.aws.amazon.com/ec2/home?region=eu-north-1#Volumes:) for unattached or oversized volumes and [EC2 > Instances](https://376129434881-cvwoy6d4.eu-north-1.console.aws.amazon.com/ec2/home?region=eu-north-1#Instances:) for stopped instances. An unattached volume remains billable until it is deleted.
+Administrators should periodically review [EC2 > Elastic Block Store > Volumes](https://console.aws.amazon.com/ec2/home?region=eu-north-1#Volumes:) for unattached or oversized volumes and [EC2 > Instances](https://console.aws.amazon.com/ec2/home?region=eu-north-1#Instances:) for stopped instances. An unattached volume remains billable until it is deleted.
 
 ## S3 is long-term shared storage
 
@@ -51,15 +51,19 @@ The lab's private research bucket uses an account- and Region-specific name. Pre
 
 When a user leaves, review and remove their `users/<username>/` content after transferring anything that belongs in `projects/` or `shared/`.
 
+See [EC2 bucket access](ec2-security.md#research-bucket-access) for the shared worker permissions.
+
 ## AMI content
 
 Administrators maintain official AMIs for standard software foundations and specific applications. Researchers should launch them through approved launch templates.
 
 Do not bake large reference databases, project inputs, or analysis outputs into an AMI by default. Keep shared data in S3 and copy or synchronize it to EBS when needed. An application-specific exception must document its storage cost, update process, and reason that startup hydration is unsuitable.
 
-When an AMI is retired, deregister it under [EC2 > Images > AMIs](https://376129434881-cvwoy6d4.eu-north-1.console.aws.amazon.com/ec2/home?region=eu-north-1#Images:) and review its backing storage under [EC2 > Elastic Block Store > Snapshots](https://376129434881-cvwoy6d4.eu-north-1.console.aws.amazon.com/ec2/home?region=eu-north-1#Snapshots:).
+When an AMI is retired, deregister it under [EC2 > Images > AMIs](https://console.aws.amazon.com/ec2/home?region=eu-north-1#Images:) and review its backing storage under [EC2 > Elastic Block Store > Snapshots](https://console.aws.amazon.com/ec2/home?region=eu-north-1#Snapshots:).
 
 ## Launch templates are the supported interface
+
+These requirements apply to EC2. For managed jobs, follow the [SageMaker container and execution-role workflow](../researchers/sagemaker.md).
 
 Launch templates should provide the complete safe configuration for an approved environment:
 
@@ -79,7 +83,7 @@ Launch templates should provide the complete safe configuration for an approved 
 
 Provide multiple templates or documented template options when workloads need meaningfully different compute or memory sizes. Users should not need to reconstruct security and storage settings manually.
 
-When an AMI or another setting changes, create a new version under [EC2 > Instances > Launch Templates](https://376129434881-cvwoy6d4.eu-north-1.console.aws.amazon.com/ec2/home?region=eu-north-1#LaunchTemplates:), test it, and then set the tested version as the default. Do not create a separate template to replace an old version of the same supported environment.
+When an AMI or another setting changes, create a new version under [EC2 > Instances > Launch Templates](https://console.aws.amazon.com/ec2/home?region=eu-north-1#LaunchTemplates:), test it, and then set the tested version as the default. Do not create a separate template to replace an old version of the same supported environment.
 
 ## Required tags
 

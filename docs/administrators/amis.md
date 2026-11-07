@@ -26,7 +26,9 @@ The two resources are maintained together. Researchers normally launch an approv
 
 The AMIs used by the lab are EBS-backed. When an AMI is created from an instance, AWS creates snapshots of its root EBS volume and, by default, the other attached EBS volumes included in the image configuration. The AMI records how those snapshots should be turned into volumes when a new instance is launched.
 
-!!!Warning "The snapshots backing the AMI continue to occupy storage and incur charges until they are deleted"
+!!!Warning "AMI snapshots remain billable"
+
+    Snapshots continue to occupy storage and incur charges until they are deleted.
 
 | Resource     | Purpose                                                    | Lifecycle                                                          |
 | ------------ | ---------------------------------------------------------- | ------------------------------------------------------------------ |
@@ -41,101 +43,75 @@ The AMIs used by the lab are EBS-backed. When an AMI is created from an instance
 
 The quality and size of an AMI depend on the state of its source instance.
 
-To launch an EC2 instance, in the `research` account, navigate to [EC2 > Instances > Launch instances](https://376129434881-cvwoy6d4.eu-north-1.console.aws.amazon.com/ec2/home?region=eu-north-1#Instances:)
+1. In the `research` account, open [EC2 > Instances](https://console.aws.amazon.com/ec2/home?region=eu-north-1#Instances:) and choose **Launch instances**.
 
-Under **Name and tags**, give the instance a temporary name (e.g., `ami-build`).
+2. Under **Name and tags**, give the instance a temporary name, such as `ami-build`, and apply the [standard ownership tags](resource-standards.md#required-tags).
 
-Under **Application and OS Images**, select an appropriate operating system. The recommended for most research software setups is whatever is the latest Ubuntu build. Check that the selected architecture is `x86_64`, unless `arm64` is explicitly required.
+3. Under **Application and OS Images**, select an operating system compatible with the required software. Ubuntu is the usual starting point. Choose `x86_64` unless `arm64` is explicitly required.
 
-Under **Instance type**, select a provision large enough to complete installation and testing. The build instance type does not determine the size of instances later launched from the image, but the architecture must remain compatible.
+4. Under **Instance type**, choose enough resources for installation and testing. The build instance type does not determine the size of instances later launched from the image, but the architecture must remain compatible.
 
-Under **Key pair**, select **Proceed without a key pair**.
+5. Under **Key pair**, select **Proceed without a key pair**.
 
-Under **Network settings** section **Firewall (security groups)**, toggle **Select existing security group** and select `rprlab-session-manager-only`.
+6. Under **Network settings > Firewall (security groups)**, choose **Select existing security group** and select `rprlab-session-manager-only`.
 
-Under **Configure storage**, set a root volume size that is only large enough for the operating system and required software. Future launch templates can increase it or attach additional volumes, but a snapshot-backed volume cannot be made smaller than its source.
+7. Under **Configure storage**, size the root volume for the operating system and required software. Confirm **Delete on termination** is selected for temporary volumes. A launch template can increase the volume size later, but cannot make a snapshot-backed volume smaller than its source.
 
-Under **Advanced details** section **IAM instance profile**, select `rprlab-ec2-research-instance-role`.
+8. Under **Advanced details > IAM instance profile**, select `rprlab-ec2-research-instance-role`.
 
-Click **Launch instance** and **Connect to instance** under **SSM Session Manager**
+9. Choose **Launch instance**, then connect through **Connect > Session Manager > Connect**.
 
-Install relevant software for the planned purpose of the image. Make sure to Remove temporary files, package caches, downloads, logs, and scratch data that should not appear on every future instance.
-
-Check disk use with `df -h` and confirm that the root volume is sensibly sized.
+10. Install and test the required software. Remove temporary files, package caches, downloads, logs, and scratch data, then check disk use with `df -h`.
 
 ### Creating the AMI
 
-Once the instance is prepared, select it under [EC2 > Instances](https://376129434881-cvwoy6d4.eu-north-1.console.aws.amazon.com/ec2/home?region=eu-north-1#Instances:), choose **Instance state > Stop instance**, then choose **Actions > Image and templates > Create image**.
+1. Select the prepared instance under [EC2 > Instances](https://console.aws.amazon.com/ec2/home?region=eu-north-1#Instances:), choose **Instance state > Stop instance**, then **Actions > Image and templates > Create image**.
 
-Under **Image details**, give the AMI a stable name containing the platform, application and a version, for example:
+2. Under **Image details**, give the AMI a name containing the platform, application, and version, such as `rprlab-ubuntu26-hoodini-v1`.
 
-```text
-rprlab-ubuntu26-hoodini-v1
-```
+3. Tag shared AMIs and their snapshots with `Owner=admin`, `Project=shared`, and `Version` set to the creation date in [ISO format](https://www.iso.org/iso-8601-date-and-time-format.html).
 
-Also apply the following tags to shared AMIs and their snapshots:
+4. Create the image and wait for it to become available. To check snapshot progress, open the AMI under [EC2 > Images > AMIs](https://console.aws.amazon.com/ec2/home?region=eu-north-1#Images:), choose **Storage**, and select its snapshot ID.
 
-- `Owner` as `admin`
+5. Launch a test instance from the AMI. Confirm that it boots, Session Manager connects, and the required software runs correctly.
 
-- `Project` as `shared`
+6. Terminate the test and source instances when they are no longer needed.
 
-- `Version` as the date in [ISO format](https://www.iso.org/iso-8601-date-and-time-format.html).
-
-Depending on the size of the final volume, it may take minutes to hours to complete the snapshot. Check progress under [EC2 > Images > AMIs](https://376129434881-cvwoy6d4.eu-north-1.console.aws.amazon.com/ec2/home?region=eu-north-1#Images:) by opening the AMI details, choosing **Storage**, and selecting the snapshot device ID (for example, `snap-xxxxxxxxxxxxxxxxx`).
-
-When the AMI is ready, launch a new test instance from it and verify:
-
-- The instance boots successfully
-
-- SSM Session Manager can connect
-
-- Expected software starts and runs as expected
-
-Terminate the test and source instances when they are no longer needed.
+Snapshot creation can take minutes to hours, depending on the volume size.
 
 ### Creating the launch template
 
-After the AMI has passed testing, create or update a launch template under [EC2 > Instances > Launch Templates](https://376129434881-cvwoy6d4.eu-north-1.console.aws.amazon.com/ec2/home?region=eu-north-1#LaunchTemplates:).
+After testing the AMI, create a template for a new environment or [update the existing template](#updating-a-launch-template).
 
-For a new supported template, choose **Create launch template**.
+1. Open [EC2 > Instances > Launch Templates](https://console.aws.amazon.com/ec2/home?region=eu-north-1#LaunchTemplates:) and choose **Create launch template**.
 
-Under **Launch template name and description**, give the template a stable name, for example:
+2. Under **Launch template name and description**, use a stable name such as `rprlab-hoodini-standard`. Describe the image series, default compute and storage, and intended use.
 
-```
- `rprlab-hoodini-standard`
-```
+3. Under **Application and OS Images**, choose **My AMIs > Owned by me** and select the tested image.
 
-Also describe the image series, default instance resources, storage, and purpose. For example:
+4. Choose a default instance type suited to the workload's CPU, memory, architecture, and cost requirements. General-purpose `m7i` or compute-optimized `c7i` instances are possible baselines for x86_64 workloads.
 
-```
-RPR Lab launch template to initiate a c7i.2xlarge (8 vCPU, 16 GiB) instance with a 250 GB root volume, using the latest rprlab-ubuntu26-hoodini series of AMI
-```
+5. Leave the **Key pair** unspecified. Under **Network settings > Firewall (security groups)**, choose **Select existing security group** and select `rprlab-session-manager-only`.
 
-Under **Application and OS Images**, choose **My AMIs > Owned by me** and select the tested image.
+6. Under **Configure storage**, set the required volume sizes and confirm **Delete on termination** is selected for temporary volumes.
 
-Choose an appropriate default instance type. General-purpose (m) and compute-optimized (c) Intel (i) families are suitable baselines for many x86_64 workloads, for example `m7i` or `c7i`, but select based on expected CPU, memory, architecture, and cost requirements.
+7. Under **Advanced details > IAM instance profile**, select `rprlab-ec2-research-instance-role`.
 
-Under **Network settings** section **Firewall (security groups)**, toggle **Select existing security group** and select `rprlab-session-manager-only`.
+8. Under **Resource tags**, set `LaunchTemplate` to the template name. Researchers must apply their own `Owner` and `Project` tags when launching instances.
 
-Under **Configure storage**, select an appropriate size for the root volume. This can be scalled up if the template is intended for large data workloads. Confirm **Delete on termination** is selected.
+9. Choose **Create launch template**, then select it and choose **Actions > Launch instance from template**.
 
-Under **Advanced details** section **IAM instance profile**, select `rprlab-ec2-research-instance-role`.
+10. Verify the instance works as expected, then terminate it.
 
-Under **Resource tags**, apply `LaunchTemplate` as the name of the launch template.
-
-Click **Create launch template**.
-
-Once the template is prepared, select it under [EC2 > Instances > Launch Templates](https://376129434881-cvwoy6d4.eu-north-1.console.aws.amazon.com/ec2/home?region=eu-north-1#LaunchTemplates:), choose **Actions > Launch instance from template**.
-
-Verify it is working as expected, then terminate the instance.
-
-Consider building additional `small` or `large` templates the up- or down-scale resources to provide options for users based on their needs, e.g. `rprlab-hoodini-large`.
+Provide additional size options when needed, such as `rprlab-hoodini-large`.
 
 ## Updating a launch template
 
-Launch templates can be re-versioned under [EC2 > Instances > Launch Templates](https://376129434881-cvwoy6d4.eu-north-1.console.aws.amazon.com/ec2/home?region=eu-north-1#LaunchTemplates:) by selecting an existing template and choosing **Actions > Modify template (Create new version)**.
+1. Open [EC2 > Instances > Launch Templates](https://console.aws.amazon.com/ec2/home?region=eu-north-1#LaunchTemplates:), select the template, and choose **Actions > Modify template (Create new version)**.
 
-When updating, remember to set the new version as the default.
+2. Update the configuration, save the new version, and launch a test instance from that version.
+
+3. After testing, set the new version as the default and terminate the test instance.
 
 ## Deregistering an AMI
 
@@ -153,4 +129,4 @@ Before deregistering:
 
     Deregistering prevents new instances from being launched from the AMI. Deleting its snapshots removes the stored image data. Existing instances launched from the AMI are not deleted, but they do not make the AMI recoverable.
 
-Under [EC2 > Images > AMIs](https://376129434881-cvwoy6d4.eu-north-1.console.aws.amazon.com/ec2/home?region=eu-north-1#Images:), select the obsolete image, choose **Actions > Deregister AMI**, and select **Delete associated snapshots** only after completing the checks above.
+Under [EC2 > Images > AMIs](https://console.aws.amazon.com/ec2/home?region=eu-north-1#Images:), select the obsolete image, choose **Actions > Deregister AMI**, and select **Delete associated snapshots** only after completing the checks above.

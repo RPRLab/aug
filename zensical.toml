@@ -14,6 +14,8 @@ nav = [
     { EC2 = "researchers/ec2.md" },
     { EBS = "researchers/ebs.md" },
     { S3 = "researchers/s3.md" },
+    { SageMaker = "researchers/sagemaker.md" },
+    { ECR = "researchers/ecr.md" },
   ] },
   { "Administrators" = [
     { Introduction = "administrators/introduction.md" },
@@ -22,6 +24,8 @@ nav = [
     { "Billing" = "administrators/billing.md" },
     { "Resource Standards" = "administrators/resource-standards.md" },
     { "EC2 Security" = "administrators/ec2-security.md" },
+    { "Container Registry (ECR)" = "administrators/ecr.md" },
+    { "SageMaker Access" = "administrators/sagemaker.md" },
     { "AMIs and Launch Templates" = "administrators/amis.md" },
     { "Hoodini AMI Example" = "administrators/hoodini-ami.md" },
   ] },

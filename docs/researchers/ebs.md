@@ -32,7 +32,7 @@ The lab's approved [EC2 launch templates](../researchers/ec2.md#launching-an-ec2
 
 ## Checking deletion behavior
 
-If you have deviated from an approved launch template, before terminating a custom instance, check its storage under [EC2 > Instances](https://376129434881-cvwoy6d4.eu-north-1.console.aws.amazon.com/ec2/home?region=eu-north-1#Instances:) or with the AWS CLI:
+If you have deviated from an approved launch template, before terminating a custom instance, check its storage under [EC2 > Instances](https://console.aws.amazon.com/ec2/home?region=eu-north-1#Instances:) or with the AWS CLI:
 
 ```sh title="shell"
 aws ec2 describe-instances \
